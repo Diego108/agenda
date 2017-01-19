@@ -2,6 +2,10 @@ package br.com.caelum.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -29,7 +33,22 @@ public class Sistema extends HttpServlet{
 			String email = req.getParameter("email");
 			contato.setNome(nome);
 			contato.setEmail(email);
+			contato.setEndereco(req.getParameter("endereco"));
 			
+			Calendar dataNascimento =  null;
+			
+			try{
+				
+				Date data = new SimpleDateFormat("dd/mm/yy").parse(req.getParameter("dataNascimento"));
+				
+				dataNascimento = Calendar.getInstance();
+				dataNascimento.setTime(data);
+			}catch(ParseException e){
+				
+				throw new RuntimeException();
+			}
+			
+			contato.setDataNascimento(dataNascimento);
 			ContatoDao dao = new ContatoDao();
 			dao.adiciona(contato);
 			
@@ -40,6 +59,8 @@ public class Sistema extends HttpServlet{
 	    			+ 	   "<h1>Adicionado com sucesso</h1>"
 	    			+ 	   "</body>"
 	    			+ 	   "</html>");
+	    	
+	    	writer.println(contato.getNome());
 		}
 
 }
