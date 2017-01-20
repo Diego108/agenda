@@ -4,7 +4,7 @@ import java.util.Calendar;
 
 public class Contato {
 	private Long id;
-	private String nome;
+	public String nome;
 	private String email;
 	private String endereco;
 	private Calendar dataNascimento;
