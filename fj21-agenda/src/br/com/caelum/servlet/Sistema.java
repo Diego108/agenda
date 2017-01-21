@@ -1,12 +1,12 @@
 package br.com.caelum.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -31,6 +31,7 @@ public class Sistema extends HttpServlet{
 			
 			String nome = req.getParameter("nome");
 			String email = req.getParameter("email");
+			String dataNascimentoTexto = req.getParameter("DATA");
 			contato.setNome(nome);
 			contato.setEmail(email);
 			contato.setEndereco(req.getParameter("endereco"));
@@ -39,7 +40,7 @@ public class Sistema extends HttpServlet{
 			
 			try{
 				
-				Date data = new SimpleDateFormat("dd/mm/yy").parse(req.getParameter("dataNascimento"));
+				Date data = new SimpleDateFormat("dd/MM/yy").parse(dataNascimentoTexto);
 				
 				dataNascimento = Calendar.getInstance();
 				dataNascimento.setTime(data);
@@ -52,7 +53,11 @@ public class Sistema extends HttpServlet{
 			ContatoDao dao = new ContatoDao();
 			dao.adiciona(contato);
 			
+			RequestDispatcher rqp = req.getRequestDispatcher("/contato-adicionado.jsp");
+			rqp.forward(req, resp);
+			/*
 			PrintWriter writer = resp.getWriter();
+			
 	    	
 	    	writer.println("<html>"
 	    			+ 	   "<body>"
@@ -61,6 +66,7 @@ public class Sistema extends HttpServlet{
 	    			+ 	   "</html>");
 	    	
 	    	writer.println(contato.getNome());
+	    	*/
 		}
 
 }
