@@ -7,7 +7,7 @@
 	<script src="js/jquery-ui.js"></script>
 </head>
 <body>
-	<form action="sistema" method="POST">
+	<form action="ServletLogica" method="POST">
 		Nome  : <input type="text" name="nome"/><br/>
 		Idade : <input type="text" name="email"/><br/>
 		Endereço : <input type="text" name="endereco"/><br/>

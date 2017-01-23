@@ -1,4 +1,4 @@
-package br.com.caelum.servlet;
+package br.com.caelum.mvc.servlet;
 
 import java.io.IOException;
 import java.text.ParseException;
