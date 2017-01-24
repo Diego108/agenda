@@ -26,6 +26,8 @@ public class ServletLogica extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 
+		System.out.println("Executei na Servlet...");
+		
 		String parametro = request.getParameter("logica");
 		String page = "br.com.caelum.mvc.logica." + parametro;
 
